@@ -1,7 +1,7 @@
 import { View, Text, Button} from 'react-native'
 import React,{useEffect} from 'react'
-import ApiHelper from '../../helpers/ApiHelper';
-import { kApiToDos } from '../../config/WebService';
+import ApiHelper from 'src/helpers/ApiHelper';
+import { kApiToDos } from 'src/config/WebService';
 import { useNavigation } from '@react-navigation/native'
 // const FetchData = async (link) => {
 //     try {

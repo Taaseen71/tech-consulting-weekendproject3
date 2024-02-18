@@ -6,6 +6,7 @@ module.exports = {
       {
         alias: {
           src: './src',
+          '@src': './src',
           '@assets': './src/assets',
           '@components': './src/components',
           '@constants': './src/constants',
@@ -24,4 +25,9 @@ module.exports = {
       },
     ],
   ],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel'],
+    },
+  },
 };
