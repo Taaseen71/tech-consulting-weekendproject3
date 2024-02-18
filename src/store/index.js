@@ -6,7 +6,8 @@ import persistReducer from 'redux-persist/es/persistReducer';
 
 import persistStore from 'redux-persist/lib/persistStore';
 import reducers from 'src/features/reducers';
-
+import sagas from "src/sagas"
+import createSagaMiddleware from 'redux-saga'
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
@@ -22,19 +23,27 @@ const logger = createLogger({
     diff: true,
 })
 
+const sagaMiddleware = createSagaMiddleware()
+
 // export default configureStore({
 //     reducer: {
 //         counter: counterReducer,
 //         user: userReducer
 //     },
-//     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger)
+//   getDefaultMiddleware({ 
+//     serializableCheck: false,
+// }).concat(logger)
 // })
 
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware({ 
+    middleware: getDefaultMiddleware => 
+
+    getDefaultMiddleware({ 
         serializableCheck: false,
-    }).concat(logger)
+    }).concat(logger, sagaMiddleware )
 })
+
+sagaMiddleware.run(sagas)
 
 export const persistor = persistStore(store);
