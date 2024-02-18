@@ -4,6 +4,10 @@ const globalStyle = (arg1, arg2, arg3, arg4) => StyleSheet.create({
     flex: {
         flex:arg1
     },
+    container: {
+        marginHorizontal: 12,
+        marginVertical: arg1 ? arg1 : 12
+    },
     centerView: {
             flex: arg1,
             alignItems: 'center',
