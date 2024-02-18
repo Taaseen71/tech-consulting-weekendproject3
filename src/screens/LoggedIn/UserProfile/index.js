@@ -44,16 +44,19 @@ const UserProfile = () => {
             {/* <Card.Cover style={globalStyle(15).container} source={{ uri: 'https://picsum.photos/700' }} /> */}
             <Card.Content>
                 <TextInput
+                    style={globalStyle().margins}
                     label="First Name"
                     value={userInfo.fname}
                     onChangeText={text => setUserInfo(prevState => ({...prevState, fname: text}))}
                 />
                 <TextInput
+                    style={globalStyle().margins}
                     label="Last Name"
                     value={userInfo.lname}
                     onChangeText={text => setUserInfo(prevState => ({...prevState, lname: text}))}
                 />
                 <TextInput
+                    style={globalStyle().margins}
                     label="Address"
                     value={userInfo.address}
                     onChangeText={text => setUserInfo(prevState => ({...prevState, address: text}))}
@@ -118,7 +121,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderColor: 'gray',
         paddingHorizontal: 8,
-        backgroundColor: 'rgba( 191,148,228, 0.2)' 
+        backgroundColor: 'rgba( 191,148,228, 0.2)', 
+        marginVertical: 4
       },
       icon: {
         marginRight: 5,
