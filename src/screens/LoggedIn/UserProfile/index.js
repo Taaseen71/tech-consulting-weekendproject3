@@ -5,7 +5,8 @@ import globalStyle from 'src/styles/GlobalStyles';
 import { useSelector } from 'react-redux';
 import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
-import TouchButton from 'src/components/TouchButton';
+import ImagePick from './ImagePick';
+// import ImagePicker from 'react-native-image-crop-picker';
 
 const UserProfile = () => {
     const [userInfo, setUserInfo] = useState({
@@ -17,9 +18,14 @@ const UserProfile = () => {
         profileImage: '',
     })
     
+    useEffect(() => {
+        setUser(userData?.data?.id ? true : false)
+        console.log(userData)
+      }, [userData])
     
     const userData = useSelector(state => state.user)
     const [user, setUser] = useState(userData?.data?.id ? true : false)
+
 
     const dropdownOptions = [
         {label: "male" , value: "male"},
@@ -27,22 +33,24 @@ const UserProfile = () => {
         {label: "prefer not to say" , value: "prefer not to say"},
     ]
     const [dropdownFocus, setDropdownFocus] = useState(false)
-
+    
 
     const [date, setDate] = useState(new Date())
     const [dateOpen, setDateOpen] = useState(false)
-    
+
+
+    const [imageData, setImageData] = useState({})
+    // /Users/st-personal/Library/Developer/CoreSimulator/Devices/4B5AD982-DD69-4054-A6F5-41CCEF119220/data/Containers/Data/Application/F688F2EA-6232-4C7E-BF92-D768B7DCF6A8/tmp/react-native-image-crop-picker
     
     useEffect(() => {
-        setUser(userData?.data?.id ? true : false)
-        console.log(userData)
-      }, [userData])
-
+        setUserInfo(prevState=> ({...prevState, profileImage: imageData?.path}))
+    }, [imageData])
+    
+    
     return (
         <Card flex={1}>
-            {/* <Card.Title title="Create Profile information" subtitle="" icon="folder" /> */}
-            {/* <Card.Cover style={globalStyle(15).container} source={{ uri: 'https://picsum.photos/700' }} /> */}
             <Card.Content>
+                <ImagePick imageData={imageData} setImageData={setImageData} />
                 <TextInput
                     style={globalStyle().margins}
                     label="First Name"
