@@ -31,11 +31,10 @@
                     "node_modules/",
                     "vendor/",
                     "repos/",
-                    "apps/"
-                ],
-                "peek": [
+                    "apps/",
                     "android/"
-                ]
+                ],
+                "peek": []
             },
             {
                 "name": "Strict",
@@ -70,6 +69,7 @@
         "yarn.lock": true,
         "__tests__/": true,
         ".bundle/": true,
+        "android/": true,
         "ios/": true,
         "node_modules/": true,
         "vendor/": true,

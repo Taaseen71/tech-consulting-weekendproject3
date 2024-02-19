@@ -22,6 +22,7 @@ export const userSlice = createSlice({
         },
         signUpUser: (state, action ) => {
             state.data = action.payload
+            state.data.userId=action.payload.id
         },
         request: state => {
             state.isFetching = true;

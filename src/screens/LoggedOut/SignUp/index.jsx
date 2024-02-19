@@ -9,20 +9,20 @@ import { kApiSignup } from 'src/config/WebService';
 const SignUp = () => {
   const navigation = useNavigation()
   const [pwd, setPwd] = useState('')
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const dispatch = useDispatch();
   
   return (
     <View flex={1}>
       <View flex={6}>
-        <TextInput 
+        {/* <TextInput 
           style={globalStyle().TextInputComponent}
           onChangeText={setName} 
           value={name} 
           placeholder={"Enter Name"}
           autoCapitalize={'none'}
-        />
+        /> */}
         <TextInput 
           style={globalStyle().TextInputComponent}
           onChangeText={setEmail} 
@@ -41,7 +41,7 @@ const SignUp = () => {
           style={globalStyle().button} 
           onPress={() => {
             if(!!email & !!pwd) {
-              dispatch(request({url: kApiSignup, data: {username: name, email: email, password:pwd}}))
+              dispatch(request({url: kApiSignup, data: { email: email, password:pwd}}))
             }
             else {
               return Alert.alert('Missing Information', 'Fill up at least the email and password')

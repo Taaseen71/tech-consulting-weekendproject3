@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
 import ImagePick from './ImagePick';
+import { getProfile, postProfile } from 'src/firebase/config';
 // import ImagePicker from 'react-native-image-crop-picker';
 
 const UserProfile = () => {
@@ -46,6 +47,36 @@ const UserProfile = () => {
         setUserInfo(prevState=> ({...prevState, profileImage: imageData?.path}))
     }, [imageData])
     
+
+
+    const postProfileData = (arg) => {
+        if(userData?.data?.userId){
+            console.log(userData?.data?.userId, arg)
+            postProfile(userData?.data?.userId, arg)
+        }
+        else {
+            console.log(userData?.data?.id, arg)
+            postProfile(userData?.data?.id, arg)
+
+        }
+    }
+    
+    useEffect(() => {
+        getProfile(userData?.data?.userId).then(arg =>{
+            console.log("Getting Profile => ", arg),
+            setUserInfo({
+                fname: arg?.fname,
+                lname: arg?.lname,
+                address: arg?.address,
+                gender: arg?.gender,
+                birthday: arg?.birthday,
+                profileImage: arg?.profileImage,
+            }),
+            setImageData({path: arg?.profileImage})
+        }
+        );
+    }, [])
+
     
     return (
         <Card flex={1}>
@@ -112,7 +143,7 @@ const UserProfile = () => {
             </Card.Content>
             <Card.Actions>
                 {/* <Button>Cancel</Button> */}
-                <Button onPress={() => {console.log(userInfo)}}>Update</Button>
+                <Button onPress={() => {postProfileData(userInfo)}}>Update</Button>
             </Card.Actions>
         </Card>
     );
